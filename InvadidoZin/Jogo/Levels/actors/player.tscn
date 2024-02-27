@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://b34ctmwwjtas7"]
+
+[ext_resource type="Script" path="res://Scripts/mov_Player.gd" id="1_mdhcd"]
+[ext_resource type="Texture2D" uid="uid://bvaeny6o16t18" path="res://Assets/place_Holders/zin_ph.png" id="2_ll7no"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nty7x"]
+size = Vector2(32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pbpm1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ll7no")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_mdhcd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nty7x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pbpm1")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+limit_left = 0
+limit_top = 0
+limit_smoothed = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
