@@ -2,9 +2,9 @@ extends CharacterBody2D
 
 
 @export var SPEED: float = 300.0
-@export var JUMP_VELOCITY: float = -550.0
+@export var JUMP_VELOCITY: float = -450.0
 
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedZin
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 1500
@@ -31,7 +31,7 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
 	
-	var hit = Input.is_action_just_pressed("hit")
+	
 
 	move_and_slide()
 	update_animation()
@@ -41,6 +41,8 @@ func update_animation():
 	if not animation_locked:
 		if direction.x != 0:
 			animated_sprite.play("run")
+		elif Input.is_action_pressed("hit"):
+			animated_sprite.play("attack")
 		else: 
 			animated_sprite.play("idle")
 
@@ -49,3 +51,7 @@ func update_facing_direction():
 		animated_sprite.flip_h = false
 	elif direction.x < 0:
 		animated_sprite.flip_h = true
+
+func _on_area_2d_body_entered(body):
+	print ("yes")
+	pass # Replace with function body.

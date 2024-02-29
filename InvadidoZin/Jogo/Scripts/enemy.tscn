@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://b5llqg10edv5l"]
+
+[ext_resource type="Texture2D" uid="uid://l10v1o1hif0u" path="res://art/Jellyfish_Sprite_Sheet.png" id="1_jmaol"]
+[ext_resource type="Script" path="res://char/enemy.gd" id="1_m57tu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jvyib"]
+radius = 7.0
+height = 24.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xnfd"]
+atlas = ExtResource("1_jmaol")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8hahm"]
+atlas = ExtResource("1_jmaol")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_364jm"]
+atlas = ExtResource("1_jmaol")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijaky"]
+atlas = ExtResource("1_jmaol")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7gds"]
+atlas = ExtResource("1_jmaol")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8c520"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4xnfd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8hahm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_364jm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijaky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7gds")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_m57tu")
+
+[node name="CollisionJellyfish" type="CollisionShape2D" parent="."]
+visibility_layer = 3
+shape = SubResource("CapsuleShape2D_jvyib")
+
+[node name="AnimatedJellyfish" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, -4)
+scale = Vector2(1.52825, 1.4445)
+sprite_frames = SubResource("SpriteFrames_8c520")
+autoplay = "default"
+frame_progress = 0.63331
+
+[node name="RayCastJellyfish" type="RayCast2D" parent="."]
+position = Vector2(2, -4)
+target_position = Vector2(-10, 0)
+collision_mask = 2
+collide_with_areas = true
